@@ -18,5 +18,6 @@ android {
 }
 
 dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    //mplementation fileTree(include: ['*.jar'], dir: 'libs')
+    compileOnly files('libs/uiinterface.jar')
 }

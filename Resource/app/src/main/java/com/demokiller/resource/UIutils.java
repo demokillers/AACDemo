@@ -3,10 +3,12 @@ package com.demokiller.resource;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
 
-public class UIutils {
+import com.demokiller.library.UIinterface;
 
-    public static Drawable getImageDrawable(Context ctx) {
-        return ctx.getResources().getDrawable(R.drawable.background);
+public class UIutils implements UIinterface {
+
+    @Override
+    public Drawable getBackground(Context context) {
+        return context.getResources().getDrawable(R.drawable.background);
     }
-
 }
