@@ -1,2 +1,2 @@
-# Demo
-a demo for many problems
+# PluginDemo
+a demo for learning plugin
