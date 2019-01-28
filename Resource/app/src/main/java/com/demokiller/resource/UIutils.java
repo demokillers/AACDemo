@@ -9,6 +9,6 @@ public class UIutils implements UIinterface {
 
     @Override
     public Drawable getBackground(Context context) {
-        return context.getResources().getDrawable(R.drawable.background);
+            return context.getResources().getDrawable(R.drawable.background);
     }
 }
