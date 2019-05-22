@@ -5,7 +5,7 @@ import android.util.Log;
 import android.widget.LinearLayout;
 
 import com.demokiller.host.resource.PluginManager;
-import com.demokiller.library.UIinterface;
+import com.demokiller.skinpatch.UIinterface;
 
 import java.io.File;
 

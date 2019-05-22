@@ -9,6 +9,7 @@ import android.content.res.Resources.Theme;
 import android.util.Log;
 
 import java.lang.reflect.Method;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 public class PluginManager {
@@ -27,6 +28,7 @@ public class PluginManager {
     private String mCurrentApk;
     private Context mContext;
     private static PluginManager mPluginManager;
+    private ArrayList<String> test=new ArrayList<>();
 
     private PluginManager() {
         mPluginTheme = new HashMap<>();
