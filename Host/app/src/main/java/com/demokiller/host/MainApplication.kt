@@ -43,15 +43,15 @@ class MainApplication : Application() {
     @SuppressLint("NewApi")
     private fun patch() {
         try {
-            val patchInfoClazz = mLoader!!.loadClass("cn.wjdiankong.patchimpl.PatchesInfoImpl")
-            val patchInfo = patchInfoClazz.newInstance() as PatchesInfo
-            val infoList = patchInfo.getPatchedClassesInfo()?: arrayListOf()
+            val patchInfoClazz = mLoader?.loadClass("com.demokiller.robustpatchimpl.PatchesInfoImpl")
+            val patchInfo = patchInfoClazz?.newInstance() as PatchesInfo
+            val infoList = patchInfo.getPatchedClassesInfo() ?: arrayListOf()
             for (info in infoList) {
-                val redirectObj = mLoader!!.loadClass(
-                        info?.patchClassName).newInstance() as ChangeQuickRedirect
-                val fixClass = mLoader!!.loadClass(info?.fixClassName)
-                val redirectF = fixClass.getField("changeQuickRedirect")
-                redirectF[null] = redirectObj
+                val redirectObj = mLoader?.loadClass(
+                        info?.patchClassName)?.newInstance() as ChangeQuickRedirect
+                val fixClass = mLoader?.loadClass(info?.fixClassName)
+                val redirectF = fixClass?.getField("changeQuickRedirect")
+                redirectF?.set(null, redirectObj)
             }
         } catch (e: Throwable) {
         }

@@ -43,7 +43,7 @@ object RobustAsmUtils {
         /**
          * 调用isSupport方法
          */
-//第一个参数：new Object[]{...};,如果方法没有参数直接传入new Object[0]
+        //第一个参数：new Object[]{...};,如果方法没有参数直接传入new Object[0]
         if (paramsTypeClass.size == 0) {
             mv.visitInsn(Opcodes.ICONST_0)
             mv.visitTypeInsn(Opcodes.ANEWARRAY, "java/lang/Object")
@@ -72,7 +72,7 @@ object RobustAsmUtils {
         /**
          * 调用accessDispatch方法
          */
-//第一个参数：new Object[]{...};,如果方法没有参数直接传入new Object[0]
+        //第一个参数：new Object[]{...};,如果方法没有参数直接传入new Object[0]
         if (paramsTypeClass.size == 0) {
             mv.visitInsn(Opcodes.ICONST_0)
             mv.visitTypeInsn(Opcodes.ANEWARRAY, "java/lang/Object")

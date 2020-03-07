@@ -1,13 +1,15 @@
 package com.demokiller.host
-
-import android.app.Activity
 import android.content.res.AssetManager
 import android.content.res.Resources
 import android.content.res.Resources.Theme
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import com.demokiller.host.resource.PluginManager
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.MainScope
+import kotlinx.coroutines.cancel
 
-open class BaseActivity : Activity() {
+open class BaseActivity : AppCompatActivity(), CoroutineScope by MainScope() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
     }
@@ -31,5 +33,10 @@ open class BaseActivity : Activity() {
             return it
         }
         return super.getTheme()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        cancel()
     }
 }

@@ -1,4 +1,4 @@
-package com.demokiller.host
+package com.demokiller.host.model
 
 import com.demokiller.host.utils.PatchProxy
 import com.demokiller.robustpatch.ChangeQuickRedirect

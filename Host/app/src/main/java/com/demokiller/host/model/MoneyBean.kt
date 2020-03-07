@@ -1,5 +1,4 @@
-package com.demokiller.host
-
+package com.demokiller.host.model
 import android.annotation.SuppressLint
 import com.demokiller.host.utils.PatchProxy
 import com.demokiller.robustpatch.ChangeQuickRedirect
