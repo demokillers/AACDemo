@@ -1,13 +1,15 @@
 package com.demokiller.host
 
+import android.annotation.TargetApi
+import android.content.ClipData
+import android.content.ClipDescription
+import android.os.Build
 import android.os.Bundle
-import android.os.UserHandle
 import android.util.Log
+import android.view.View.DragShadowBuilder
+import androidx.annotation.RequiresApi
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.ViewModelProviders
-import androidx.lifecycle.ViewModelStore
-import androidx.paging.PagedList
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.demokiller.host.adapter.ContactAdapter
 import com.demokiller.host.database.Contact
@@ -22,6 +24,7 @@ import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
 import java.io.File
 
+
 class MainActivity : BaseActivity() {
     private var classLoader: DexClassLoader? = null
     private var lib: UIinterface? = null
@@ -35,15 +38,32 @@ class MainActivity : BaseActivity() {
         recycler_view.adapter = adapter
         recycler_view.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
         launch {
-            val a =async (Dispatchers.IO) {
+            val task = async(Dispatchers.IO) {
                 DatabaseUtil.getInstance().contactDao().insertContact(Contact(1, "1"))
                 DatabaseUtil.getInstance().contactDao().insertContact(Contact(2, "2"))
                 DatabaseUtil.getInstance().contactDao().insertContact(Contact(3, "3"))
             }
-            a.join()
+            task.join()
             viewModel.mContact.observe(this@MainActivity, Observer {
                 adapter.submitList(it)
             })
+        }
+
+        initDrag()
+    }
+    
+    private fun initDrag() {
+        val item = ClipData.Item(drag_text_view.text)
+        // Create a new ClipData using the tag as a label, the plain text MIME type, and
+        // the already-created item. This will create a new ClipDescription object within the
+        // ClipData, and set its MIME type entry to "text/plain"
+        val dragData = ClipData(
+                drag_text_view.text,
+                arrayOf(ClipDescription.MIMETYPE_TEXT_PLAIN),
+                item)
+        drag_text_view.setOnLongClickListener {
+            val shadowBuilder = DragShadowBuilder(it)
+            it.startDrag(dragData, shadowBuilder, null, 0)
         }
     }
 

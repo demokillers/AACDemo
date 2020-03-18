@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
 
@@ -13,9 +14,30 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recycler_view"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent">
 
         </androidx.recyclerview.widget.RecyclerView>
+
+        <com.demokiller.host.widget.DropTextView
+            android:id="@+id/drag_text_view"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:background="#00A"
+            android:text="测试"
+            app:layout_constraintTop_toBottomOf="@+id/recycler_view"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"/>
+
+        <com.demokiller.host.widget.DropTargetView
+            android:id="@+id/drag_target_view"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:background="#FFFF0000"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </layout>
