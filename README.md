@@ -1,2 +1,2 @@
-# PluginDemo
-a demo for learning plugin
+# AACDemo
+a demo for learning Android Architecture Components
