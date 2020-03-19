@@ -15,6 +15,7 @@ import com.demokiller.host.adapter.ContactAdapter
 import com.demokiller.host.database.Contact
 import com.demokiller.host.database.DatabaseUtil
 import com.demokiller.host.model.ContactViewModel
+import com.demokiller.host.okhttp4.OkHttp4Util
 import com.demokiller.host.resource.PluginManager
 import com.demokiller.library.UIinterface
 import dalvik.system.DexClassLoader
@@ -22,7 +23,12 @@ import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
+import okhttp3.Call
+import okhttp3.Callback
+import okhttp3.Request
+import okhttp3.Response
 import java.io.File
+import java.io.IOException
 
 
 class MainActivity : BaseActivity() {
@@ -47,21 +53,18 @@ class MainActivity : BaseActivity() {
             viewModel.mContact.observe(this@MainActivity, Observer {
                 adapter.submitList(it)
             })
+            drag_text_view.text = OkHttp4Util.post("https://www.baidu.com")
         }
-
         initDrag()
     }
-    
+
     private fun initDrag() {
-        val item = ClipData.Item(drag_text_view.text)
-        // Create a new ClipData using the tag as a label, the plain text MIME type, and
-        // the already-created item. This will create a new ClipDescription object within the
-        // ClipData, and set its MIME type entry to "text/plain"
-        val dragData = ClipData(
-                drag_text_view.text,
-                arrayOf(ClipDescription.MIMETYPE_TEXT_PLAIN),
-                item)
         drag_text_view.setOnLongClickListener {
+            val item = ClipData.Item(drag_text_view.text)
+            val dragData = ClipData(
+                    drag_text_view.text,
+                    arrayOf(ClipDescription.MIMETYPE_TEXT_PLAIN),
+                    item)
             val shadowBuilder = DragShadowBuilder(it)
             it.startDrag(dragData, shadowBuilder, null, 0)
         }
