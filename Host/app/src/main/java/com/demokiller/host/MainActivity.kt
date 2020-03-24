@@ -1,34 +1,28 @@
 package com.demokiller.host
 
-import android.annotation.TargetApi
 import android.content.ClipData
 import android.content.ClipDescription
-import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.view.View.DragShadowBuilder
-import androidx.annotation.RequiresApi
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.demokiller.host.adapter.ContactAdapter
+import com.demokiller.host.api.TestSpi
 import com.demokiller.host.database.Contact
 import com.demokiller.host.database.DatabaseUtil
 import com.demokiller.host.model.ContactViewModel
 import com.demokiller.host.okhttp4.OkHttp4Util
 import com.demokiller.host.resource.PluginManager
 import com.demokiller.library.UIinterface
+import com.demokiller.spiandroid.SpiProvider
 import dalvik.system.DexClassLoader
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
-import okhttp3.Call
-import okhttp3.Callback
-import okhttp3.Request
-import okhttp3.Response
 import java.io.File
-import java.io.IOException
 
 
 class MainActivity : BaseActivity() {
@@ -56,6 +50,7 @@ class MainActivity : BaseActivity() {
             drag_text_view.text = OkHttp4Util.post("https://www.baidu.com")
         }
         initDrag()
+        SpiProvider.syncGetImpl(TestSpi::class.java).test()
     }
 
     private fun initDrag() {

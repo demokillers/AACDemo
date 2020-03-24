@@ -1,0 +1,12 @@
+apply plugin: 'java-library'
+apply plugin: 'kotlin'
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    api 'com.squareup:javapoet:1.10.0'
+    implementation project(':spiannotation')
+}
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
