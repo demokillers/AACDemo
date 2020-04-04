@@ -3,6 +3,7 @@ package com.demokiller.host
 import android.annotation.SuppressLint
 import android.app.Application
 import android.content.Context
+import com.demokiller.host.hook.HookUtil
 import com.demokiller.robustpatch.ChangeQuickRedirect
 import com.demokiller.robustpatch.PatchesInfo
 import dalvik.system.DexClassLoader
@@ -20,6 +21,7 @@ class MainApplication : Application() {
             patch()
         }
         super.attachBaseContext(base)
+        HookUtil.hookPackageManager(base)
     }
 
     @SuppressLint("SdCardPath")

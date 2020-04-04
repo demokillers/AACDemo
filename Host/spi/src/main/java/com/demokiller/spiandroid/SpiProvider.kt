@@ -9,10 +9,10 @@ object SpiProvider {
 
     fun <T> syncGetImpl(clz: Class<T>): T {
         mModels[clz]?.also { return it.castToImpl() }
-        synchronized(clz) {
+        synchronized(SpiProvider) {
             mModels[clz]?.also { return it.castToImpl() }
             val finder = createImplFinder(clz)
-            if(finder.getAllApis().contains(clz)){
+            if(finder.getApis().contains(clz)){
                 createImpl(finder)
             }
         }
@@ -29,7 +29,7 @@ object SpiProvider {
 
     private fun createImpl(finder: IServiceImplFinder) {
         val apiImpl = finder.getInstance()
-        finder.getAllApis().forEach {
+        finder.getApis().forEach {
             mModels[it as Class<out Any>] = apiImpl
         }
     }

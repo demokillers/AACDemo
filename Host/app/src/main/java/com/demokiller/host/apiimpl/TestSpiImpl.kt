@@ -7,7 +7,7 @@ import com.demokiller.spiannotation.ServiceImpl
 @ServiceImpl
 class TestSpiImpl: TestSpi {
     override fun test() {
-        Log.d("wzh","eeeeeeeeeeee")
+        Log.d("demoKillerTag","TestSpiImpl")
     }
 
 }

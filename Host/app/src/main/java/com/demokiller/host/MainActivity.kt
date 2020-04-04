@@ -2,6 +2,8 @@ package com.demokiller.host
 
 import android.content.ClipData
 import android.content.ClipDescription
+import android.content.Intent
+import android.content.pm.PackageManager
 import android.os.Bundle
 import android.util.Log
 import android.view.View.DragShadowBuilder
@@ -53,6 +55,11 @@ class MainActivity : BaseActivity() {
         SpiProvider.syncGetImpl(TestSpi::class.java).test()
     }
 
+    override fun onResume() {
+        super.onResume()
+        applicationContext.packageManager.getPackageInfo("com.demokiller.host", PackageManager.GET_ACTIVITIES)
+    }
+
     private fun initDrag() {
         drag_text_view.setOnLongClickListener {
             val item = ClipData.Item(drag_text_view.text)
@@ -63,6 +70,9 @@ class MainActivity : BaseActivity() {
             val shadowBuilder = DragShadowBuilder(it)
             it.startDrag(dragData, shadowBuilder, null, 0)
         }
+        drag_text_view.setOnClickListener {
+            startActivity(Intent(this, ContactActivity::class.java))
+        }
     }
 
     fun loadDex() {
@@ -71,9 +81,9 @@ class MainActivity : BaseActivity() {
         val file = File(filePath)
         if (!file.exists()) filePath = "/mnt/usb/sdb1/app-release-unsigned.apk"
         val releasePath = cacheDir.absolutePath
-        Log.d("wzh", filePath)
-        Log.d("wzh", releasePath)
-        Log.d("wzh", getClassLoader().toString())
+        Log.d("demoKillerTag", filePath)
+        Log.d("demoKillerTag", releasePath)
+        Log.d("demoKillerTag", getClassLoader().toString())
         classLoader = DexClassLoader(filePath, releasePath, null, getClassLoader())
         PluginManager.setContext(this)
         PluginManager.loadResources(filePath)
@@ -91,7 +101,7 @@ class MainActivity : BaseActivity() {
             lib = clazz?.newInstance() as UIinterface
             root_layout.background = lib?.getBackground(this)
         } catch (e: Exception) {
-            Log.i("wzh", "error:" + Log.getStackTraceString(e))
+            Log.i("demoKillerTag", "error:" + Log.getStackTraceString(e))
         }
     }
 }
