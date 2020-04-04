@@ -41,7 +41,7 @@ object PluginManager {
             mPluginAsset[apkPath] = assetManager
             mCurrentApk = apkPath
         } catch (e: Exception) {
-            Log.d("wzh", "============loadResource error")
+            Log.d("demokiller", "============loadResource error")
             e.printStackTrace()
             return
         }

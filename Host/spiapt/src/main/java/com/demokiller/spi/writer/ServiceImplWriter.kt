@@ -18,26 +18,17 @@ class ServiceImplWriter(private var serviceProcessData: SingleServiceImplProcess
             val builder = TypeSpec.classBuilder(it.parseClassName() + ServiceConst.SERVICE_FINDER_SUFFIX)
                     .addModifiers(Modifier.PUBLIC, Modifier.FINAL)
                     .addSuperinterface(TypeName.get(IServiceImplFinder::class.java))
-                    .addMethod(createGetAllApisMethod())
+                    .addMethod(createGetApisMethod())
                     .addMethod(createGetInstanceMethod())
-                    .addMethod(createFirstApiClassMethod())
             write(it.parsePackage(), builder, processingEnvironment)
         }
     }
 
-    private fun createGetAllApisMethod(): MethodSpec? {
-        return MethodSpec.methodBuilder("getAllApis")
+    private fun createGetApisMethod(): MethodSpec? {
+        return MethodSpec.methodBuilder("getApis")
                 .addModifiers(Modifier.PUBLIC)
                 .returns(Array<Any>::class.java)
                 .addStatement("return new Class[]{${allApis(serviceProcessData.allApiFullNames)}}")
-                .build()
-    }
-
-    private fun createFirstApiClassMethod(): MethodSpec? {
-        return MethodSpec.methodBuilder("getFirstApiClass")
-                .addModifiers(Modifier.PUBLIC)
-                .returns(Class::class.java)
-                .addStatement("return ${serviceProcessData.firstApi}.class")
                 .build()
     }
 
