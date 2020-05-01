@@ -11,14 +11,30 @@ android {
         targetSdkVersion rootProject.targetSdkVersion
         versionCode 1
         versionName "1.0"
+        externalNativeBuild {
+            cmake {
+                cppFlags '-std=c++11'
+            }
+        }
+    }
+
+    externalNativeBuild {
+        cmake {
+            path 'CMakeLists.txt'
+        }
     }
 
     signingConfigs {
         platform {
             keyAlias 'androiddebugkey'
             keyPassword 'android'
-            //storeFile file(PLATFORM_STORE_FILE)
             storePassword 'android'
+        }
+    }
+
+    sourceSets {
+        main {
+            jniLibs.srcDirs = ['libs']
         }
     }
 
@@ -35,6 +51,15 @@ android {
         debug {
             debuggable true
             //signingConfig signingConfigs.platform
+        }
+    }
+
+    splits {
+        abi {
+            enable true
+            reset()
+            include 'armeabi-v7a'
+            universalApk false
         }
     }
 }

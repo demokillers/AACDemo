@@ -11,6 +11,12 @@ import java.io.File
 
 class MainApplication : Application() {
     private var mLoader: DexClassLoader? = null
+
+    companion object{
+        init {
+            System.loadLibrary("native-lib")
+        }
+    }
     override fun onCreate() {
         super.onCreate()
     }

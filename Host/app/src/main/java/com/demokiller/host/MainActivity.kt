@@ -15,6 +15,7 @@ import com.demokiller.host.api.TestSpi
 import com.demokiller.host.database.Contact
 import com.demokiller.host.database.DatabaseUtil
 import com.demokiller.host.model.ContactViewModel
+import com.demokiller.host.native.JNIUtils
 import com.demokiller.host.okhttp4.OkHttp4Util
 import com.demokiller.host.resource.PluginManager
 import com.demokiller.library.UIinterface
@@ -58,6 +59,7 @@ class MainActivity : BaseActivity() {
     override fun onResume() {
         super.onResume()
         applicationContext.packageManager.getPackageInfo("com.demokiller.host", PackageManager.GET_ACTIVITIES)
+        Log.d("demokillerTag", JNIUtils().testJNI())
     }
 
     private fun initDrag() {
