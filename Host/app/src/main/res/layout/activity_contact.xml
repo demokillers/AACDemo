@@ -3,7 +3,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+    <com.demokiller.host.view.MarqueeTextView
+        android:id="@+id/text_tv"
+        android:layout_width="120dp"
+        android:layout_height="30dp"
+        android:singleLine="true"
+        android:ellipsize="marquee"
+        android:marqueeRepeatLimit="1"
+        android:text="sfsffffffffffffffffffffffffff"
+        android:textSize="20sp" />
 </androidx.constraintlayout.widget.ConstraintLayout>
