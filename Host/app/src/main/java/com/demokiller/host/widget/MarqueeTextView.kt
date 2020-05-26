@@ -1,4 +1,4 @@
-package com.demokiller.host.view
+package com.demokiller.host.widget
 
 import android.annotation.SuppressLint
 import android.content.Context
