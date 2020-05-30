@@ -6,6 +6,7 @@ import android.os.IBinder
 import android.os.Parcel
 import android.util.Log
 import android.widget.Toast
+import com.demokiller.host.utils.ConstantUtils
 import java.lang.reflect.Proxy
 
 class HookUtil {
@@ -19,10 +20,10 @@ class HookUtil {
             val asInterfaceMethod = interfaceStubClass.getDeclaredMethod("asInterface", IBinder::class.java)
             val serviceBinderImplProxy = Proxy.newProxyInstance(context.classLoader,
                     arrayOf(IBinder::class.java)) { _, method, args ->
-                Log.e("demoKillerTag", "method=$method")
-                Log.e("demoKillerTag", Thread.currentThread().stackTrace.contentDeepToString())
+                Log.e(ConstantUtils.TAG, "method=$method")
+                Log.e(ConstantUtils.TAG, Thread.currentThread().stackTrace.contentDeepToString())
                 if (method.name == "transact") {
-                    Log.e("demoKillerTag", "transact data.size=" + (args[1] as Parcel).dataSize())
+                    Log.e(ConstantUtils.TAG, "transact data.size=" + (args[1] as Parcel).dataSize())
                 }
                 method.invoke(serviceBinder, *(args ?: emptyArray()))
             }

@@ -18,6 +18,7 @@ import com.demokiller.host.model.ContactViewModel
 import com.demokiller.host.native.JNIUtils
 import com.demokiller.host.okhttp4.OkHttp4Util
 import com.demokiller.host.resource.PluginManager
+import com.demokiller.host.utils.ConstantUtils
 import com.demokiller.library.UIinterface
 import com.demokiller.spiandroid.SpiProvider
 import dalvik.system.DexClassLoader
@@ -59,7 +60,7 @@ class MainActivity : BaseActivity() {
     override fun onResume() {
         super.onResume()
         applicationContext.packageManager.getPackageInfo("com.demokiller.host", PackageManager.GET_ACTIVITIES)
-        Log.d("demokillerTag", JNIUtils().testJNI())
+        Log.d(ConstantUtils.TAG, JNIUtils().testJNI())
     }
 
     private fun initDrag() {
@@ -83,9 +84,9 @@ class MainActivity : BaseActivity() {
         val file = File(filePath)
         if (!file.exists()) filePath = "/mnt/usb/sdb1/app-release-unsigned.apk"
         val releasePath = cacheDir.absolutePath
-        Log.d("demoKillerTag", filePath)
-        Log.d("demoKillerTag", releasePath)
-        Log.d("demoKillerTag", getClassLoader().toString())
+        Log.d(ConstantUtils.TAG, filePath)
+        Log.d(ConstantUtils.TAG, releasePath)
+        Log.d(ConstantUtils.TAG, getClassLoader().toString())
         classLoader = DexClassLoader(filePath, releasePath, null, getClassLoader())
         PluginManager.setContext(this)
         PluginManager.loadResources(filePath)
@@ -103,7 +104,7 @@ class MainActivity : BaseActivity() {
             lib = clazz?.newInstance() as UIinterface
             root_layout.background = lib?.getBackground(this)
         } catch (e: Exception) {
-            Log.i("demoKillerTag", "error:" + Log.getStackTraceString(e))
+            Log.i(ConstantUtils.TAG, "error:" + Log.getStackTraceString(e))
         }
     }
 }

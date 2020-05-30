@@ -92,4 +92,5 @@ dependencies {
     implementation project(':spi')
     implementation project(':spiannotation')
     kapt project(':spiapt')
+    implementation 'androidx.work:work-runtime:2.1.0'
 }
