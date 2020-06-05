@@ -1,20 +1,20 @@
 package com.demokiller.spi.data
 
-import com.demokiller.spi.writer.ServiceImplWriter
+import com.demokiller.spi.writer.ServiceWriter
 import com.demokiller.spiannotation.Service
 import javax.annotation.processing.ProcessingEnvironment
 import javax.lang.model.element.Element
 import javax.lang.model.element.TypeElement
 
-class ServiceImplProcessData(private val mContext: CompilerContext, private val mServiceImplElement: Set<Element>) {
+class ServiceProcessData(private val mContext: CompilerContext, private val mServiceImplElement: Set<Element>) {
 
-    val mImplDatas = mutableListOf<SingleServiceImplProcessData>()
+    val mImplDatas = mutableListOf<Data>()
 
     init {
-        collectBaseData()
+        generateData()
     }
 
-    private fun collectBaseData() {
+    private fun generateData() {
         mServiceImplElement.forEach {
             it as TypeElement
             //全类名
@@ -43,14 +43,14 @@ class ServiceImplProcessData(private val mContext: CompilerContext, private val 
                 }
             }
 
-            mImplDatas.add(SingleServiceImplProcessData(fullClassName, allApiFullNames, firstApi))
+            mImplDatas.add(Data(fullClassName, allApiFullNames, firstApi))
 
         }
     }
 
     fun write(processingEnvironment: ProcessingEnvironment) {
         mImplDatas.forEach {
-            ServiceImplWriter(it).writeToFile(processingEnvironment)
+            ServiceWriter(it).writeToFile(processingEnvironment)
         }
     }
 }

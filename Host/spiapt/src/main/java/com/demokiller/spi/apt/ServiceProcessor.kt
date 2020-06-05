@@ -1,6 +1,6 @@
 package com.demokiller.spi.apt
 import com.demokiller.spi.data.CompilerContext
-import com.demokiller.spi.data.ServiceImplProcessData
+import com.demokiller.spi.data.ServiceProcessData
 import com.demokiller.spiannotation.Service
 import com.demokiller.spiannotation.ServiceImpl
 import javax.annotation.processing.AbstractProcessor
@@ -33,7 +33,7 @@ class ServiceProcessor : AbstractProcessor() {
             return true
         }
         val serviceSet = roundEnvironment.getElementsAnnotatedWith(ServiceImpl::class.java)
-        val allData = ServiceImplProcessData(compilerContext, serviceSet)
+        val allData = ServiceProcessData(compilerContext, serviceSet)
         allData.write(processingEnv)
         return true
     }

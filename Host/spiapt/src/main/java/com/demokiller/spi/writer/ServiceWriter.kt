@@ -1,20 +1,22 @@
 package com.demokiller.spi.writer
 
-import com.demokiller.spi.data.SingleServiceImplProcessData
+import com.demokiller.spi.data.Data
 import com.demokiller.spi.data.parseClassName
 import com.demokiller.spi.data.parsePackage
 import com.demokiller.spiannotation.IServiceImplFinder
 import com.demokiller.spiannotation.ServiceConst
+import com.squareup.javapoet.JavaFile
 import com.squareup.javapoet.MethodSpec
 import com.squareup.javapoet.TypeName
 import com.squareup.javapoet.TypeSpec
+import java.io.IOException
 import javax.annotation.processing.ProcessingEnvironment
 import javax.lang.model.element.Modifier
 
-class ServiceImplWriter(private var serviceProcessData: SingleServiceImplProcessData) : CompilerBaseWriter() {
+class ServiceWriter(private var data: Data) {
 
     fun writeToFile(processingEnvironment: ProcessingEnvironment) {
-        serviceProcessData.allApiFullNames.forEach {
+        data.allApiFullNames.forEach {
             val builder = TypeSpec.classBuilder(it.parseClassName() + ServiceConst.SERVICE_FINDER_SUFFIX)
                     .addModifiers(Modifier.PUBLIC, Modifier.FINAL)
                     .addSuperinterface(TypeName.get(IServiceImplFinder::class.java))
@@ -28,7 +30,7 @@ class ServiceImplWriter(private var serviceProcessData: SingleServiceImplProcess
         return MethodSpec.methodBuilder("getApis")
                 .addModifiers(Modifier.PUBLIC)
                 .returns(Array<Any>::class.java)
-                .addStatement("return new Class[]{${allApis(serviceProcessData.allApiFullNames)}}")
+                .addStatement("return new Class[]{${allApis(data.allApiFullNames)}}")
                 .build()
     }
 
@@ -36,7 +38,7 @@ class ServiceImplWriter(private var serviceProcessData: SingleServiceImplProcess
         return MethodSpec.methodBuilder("getInstance")
                 .addModifiers(Modifier.PUBLIC)
                 .returns(Any::class.java)
-                .addStatement("return new ${serviceProcessData.fullClassName}()")
+                .addStatement("return new ${data.fullClassName}()")
                 .build()
     }
 
@@ -49,6 +51,14 @@ class ServiceImplWriter(private var serviceProcessData: SingleServiceImplProcess
             }
         }
         return result
+    }
+
+    @Throws(IOException::class)
+    private fun write(packageName: String, builder: TypeSpec.Builder, processingEnvironment: ProcessingEnvironment) {
+        JavaFile.builder(packageName,
+                builder.build())
+                .build()
+                .writeTo(processingEnvironment.filer)
     }
 
 }

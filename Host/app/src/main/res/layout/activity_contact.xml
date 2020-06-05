@@ -1,15 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <com.demokiller.host.widget.MarqueeTextView
-        android:id="@+id/text_tv"
+        android:id="@+id/marqueetextview"
         android:layout_width="120dp"
         android:layout_height="30dp"
         android:singleLine="true"
         android:ellipsize="marquee"
         android:marqueeRepeatLimit="1"
         android:text="sfsffffffffffffffffffffffffff"
-        android:textSize="20sp" />
+        android:textSize="20sp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"/>
+
+    <TextView
+        android:id="@+id/textview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:maxLines="1"
+        android:textSize="15sp"
+        android:maxWidth="40dp"
+        android:layout_marginTop="50dp"
+        android:text="我的身份"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"/>
 </androidx.constraintlayout.widget.ConstraintLayout>
