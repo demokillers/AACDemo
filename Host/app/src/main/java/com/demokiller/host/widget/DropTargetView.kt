@@ -17,17 +17,17 @@ import androidx.appcompat.widget.AppCompatImageView
 
 class DropTargetView : AppCompatImageView, OnDragListener {
 
-    constructor(context: Context?) : super(context) {
+    constructor(context: Context) : super(context) {
         // TODO Auto-generated constructor stub
         init()
     }
 
-    constructor(context: Context?, attrs: AttributeSet?) : super(context, attrs) {
+    constructor(context: Context, attrs: AttributeSet?) : super(context, attrs) {
         // TODO Auto-generated constructor stub
         init()
     }
 
-    constructor(context: Context?, attrs: AttributeSet?, defaultStyle: Int) : super(context, attrs, defaultStyle) {
+    constructor(context: Context, attrs: AttributeSet?, defaultStyle: Int) : super(context, attrs, defaultStyle) {
         // TODO Auto-generated constructor stub
         init()
     }
