@@ -2,6 +2,7 @@
 buildscript {
 
     repositories {
+        maven{setUrl("https://mirrors.tencent.com/nexus/repository/maven-public/")}
         maven {
             url "https://maven.aliyun.com/repository/jcenter"
         }
@@ -14,14 +15,14 @@ buildscript {
     }
 
     ext {
-        kotlin_version = '1.4.0'
-        minSdkVersion = 17
-        targetSdkVersion = 28
-        compileSdkVersion = 28
+        kotlin_version = '1.8.20'
+        minSdkVersion = 21
+        targetSdkVersion = 30
+        compileSdkVersion = 30
     }
 
     dependencies {
-        classpath 'com.android.tools.build:gradle:4.0.1'
+        classpath 'com.android.tools.build:gradle:8.1.1'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
     }
 
@@ -29,6 +30,7 @@ buildscript {
 
 allprojects {
     repositories {
+        maven{setUrl("https://mirrors.tencent.com/nexus/repository/maven-public/")}
         maven {
             url "https://maven.aliyun.com/repository/jcenter"
         }

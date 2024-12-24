@@ -59,7 +59,7 @@ object PluginManager {
         val pm = mContext?.packageManager
         var pkgInfo: PackageInfo? = null
         try {
-            pkgInfo = pm?.getPackageArchiveInfo(apkFilepath,
+            pkgInfo = pm?.getPackageArchiveInfo(apkFilepath.orEmpty(),
                     PackageManager.GET_ACTIVITIES or
                             PackageManager.GET_SERVICES or
                             PackageManager.GET_META_DATA)

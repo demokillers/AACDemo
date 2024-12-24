@@ -6,7 +6,7 @@ import androidx.room.PrimaryKey
 
 
 @Entity
-class Contact(@PrimaryKey val uid: Int = 0, @ColumnInfo(name = "name") val name: String? = null) {
+class Contact(@PrimaryKey var uid: Int = 0, @ColumnInfo(name = "name") var name: String? = null) {
 
     override fun equals(other: Any?): Boolean {
         if (this === other) return true

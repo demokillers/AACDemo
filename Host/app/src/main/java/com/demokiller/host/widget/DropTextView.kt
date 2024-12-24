@@ -14,17 +14,17 @@ import androidx.appcompat.widget.AppCompatTextView
 
 class DropTextView : AppCompatTextView, OnDragListener {
 
-    constructor(context: Context?) : super(context) {
+    constructor(context: Context) : super(context) {
         // TODO Auto-generated constructor stub
         init()
     }
 
-    constructor(context: Context?, attrs: AttributeSet?) : super(context, attrs) {
+    constructor(context: Context, attrs: AttributeSet?) : super(context, attrs) {
         // TODO Auto-generated constructor stub
         init()
     }
 
-    constructor(context: Context?, attrs: AttributeSet?, defaultStyle: Int) : super(context, attrs, defaultStyle) {
+    constructor(context: Context, attrs: AttributeSet?, defaultStyle: Int) : super(context, attrs, defaultStyle) {
         // TODO Auto-generated constructor stub
         init()
     }

@@ -12,5 +12,4 @@
 /build
 /captures
 .externalNativeBuild
-/gradle
 /app/.cxx

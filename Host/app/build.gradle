@@ -1,14 +1,16 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
-apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-parcelize'
 apply plugin: 'kotlin-kapt'
 
 android {
     compileSdkVersion rootProject.compileSdkVersion
+    namespace = "com.demokiller.host"
     defaultConfig {
         applicationId "com.demokiller.host"
         minSdkVersion rootProject.minSdkVersion
         targetSdkVersion rootProject.targetSdkVersion
+        compileSdkVersion rootProject.compileSdkVersion
         versionCode 1
         versionName "1.0"
         externalNativeBuild {
@@ -38,8 +40,8 @@ android {
         }
     }
 
-    dataBinding {
-        enabled true
+    buildFeatures {
+        viewBinding true
     }
 
     buildTypes {
@@ -61,6 +63,15 @@ android {
             include 'armeabi-v7a'
             universalApk false
         }
+    }
+
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
+    }
+
+    kotlinOptions {
+        jvmTarget = "17"
     }
 }
 
