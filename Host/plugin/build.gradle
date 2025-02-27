@@ -1,0 +1,25 @@
+apply plugin: 'java-library'
+apply plugin: 'maven-publish' //要想发布到Maven，此插件必须使用
+apply plugin: 'java'
+
+dependencies {
+    implementation gradleApi()
+    implementation localGroovy()
+    implementation 'com.android.tools.build:gradle:8.1.4'
+}
+
+//将插件打包上传到本地maven仓库
+publishing {
+    publications {
+        ASMPlugin(MavenPublication) {
+            from components.java
+            groupId = 'com.demokiller.plugin'
+            artifactId = 'MyCustomGradlePlugin'
+            version = '1.0.0'
+        }
+    }
+}
+java {
+    sourceCompatibility = JavaVersion.VERSION_17
+    targetCompatibility = JavaVersion.VERSION_17
+}

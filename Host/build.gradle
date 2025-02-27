@@ -11,7 +11,8 @@ buildscript {
         }
         google()
         jcenter()
-
+        mavenCentral() //必须
+        mavenLocal()
     }
 
     ext {
@@ -24,6 +25,7 @@ buildscript {
     dependencies {
         classpath 'com.android.tools.build:gradle:8.1.4'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+        classpath "com.demokiller.plugin:MyCustomGradlePlugin:1.0.0" // 依赖本地 Maven 仓库下的插件
     }
 
 }
@@ -40,6 +42,7 @@ allprojects {
         google()
         jcenter()
         mavenCentral()
+        mavenLocal()
     }
 }
 
