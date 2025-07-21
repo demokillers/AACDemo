@@ -17,6 +17,7 @@ import com.demokiller.host.database.DatabaseUtil
 import com.demokiller.host.databinding.ActivityMainBinding
 import com.demokiller.host.model.ContactViewModel
 import com.demokiller.host.native.JNIUtils
+import com.demokiller.host.notification.NotificationUtils
 import com.demokiller.host.okhttp4.OkHttp4Util
 import com.demokiller.host.resource.PluginManager
 import com.demokiller.host.utils.ConstantUtils
@@ -38,21 +39,21 @@ class MainActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        DatabaseUtil.getInstance(this)
+        //DatabaseUtil.getInstance(this)
         val viewModel = ViewModelProvider(this)[ContactViewModel::class.java]
         val adapter = ContactAdapter()
         binding.recyclerView.adapter = adapter
         binding.recyclerView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
         launch {
             val task = async(Dispatchers.IO) {
-                DatabaseUtil.getInstance().contactDao().insertContact(Contact(1, "1"))
+                /*DatabaseUtil.getInstance().contactDao().insertContact(Contact(1, "1"))
                 DatabaseUtil.getInstance().contactDao().insertContact(Contact(2, "2"))
-                DatabaseUtil.getInstance().contactDao().insertContact(Contact(3, "3"))
+                DatabaseUtil.getInstance().contactDao().insertContact(Contact(3, "3"))*/
             }
             task.join()
-            viewModel.mContact.observe(this@MainActivity, Observer {
+            /*viewModel.mContact.observe(this@MainActivity, Observer {
                 adapter.submitList(it)
-            })
+            })*/
             binding.dragTextView.text = OkHttp4Util.post("https://www.baidu.com")
         }
         initDrag()
@@ -76,7 +77,8 @@ class MainActivity : BaseActivity() {
             it.startDrag(dragData, shadowBuilder, null, 0)
         }
         binding.dragTextView.setOnClickListener {
-            startActivity(Intent(this, ContactActivity::class.java))
+            //startActivity(Intent(this, ContactActivity::class.java))
+            NotificationUtils.createNotification()
         }
     }
 
