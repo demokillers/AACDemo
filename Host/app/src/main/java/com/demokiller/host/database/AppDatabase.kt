@@ -4,6 +4,7 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import com.demokiller.host.utils.AppUtils
 import java.lang.Exception
 
 
@@ -14,7 +15,7 @@ abstract class AppDatabase : RoomDatabase() {
 
 object DatabaseUtil {
     var instance: AppDatabase? = null
-    fun getInstance(context: Context? = null): AppDatabase {
+    fun getInstance(context: Context? = AppUtils.getContext()): AppDatabase {
         if (instance == null) {
             synchronized(AppDatabase::class.java) {
                 if (context == null) {

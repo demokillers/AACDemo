@@ -11,7 +11,7 @@ import androidx.room.Query
 interface ContactDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertContact(contact: Contact?)
+    fun insertContact(contact: Contact)
 
     @Query("SELECT * FROM contact ORDER BY uid DESC")
     fun getContactByUid(): DataSource.Factory<Int, Contact>

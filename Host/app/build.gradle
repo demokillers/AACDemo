@@ -1,8 +1,11 @@
-apply plugin: 'com.android.application'
-apply plugin: 'kotlin-android'
-apply plugin: 'kotlin-parcelize'
-apply plugin: 'kotlin-kapt'
-apply plugin: 'com.demokiller.plugin'
+plugins {
+    id 'com.google.devtools.ksp'
+    id 'com.demokiller.plugin'
+    id 'com.android.application'
+    id 'kotlin-android'
+    id 'kotlin-parcelize'
+    id 'kotlin-kapt'
+}
 
 android {
     namespace = "com.demokiller.host"
@@ -90,8 +93,8 @@ dependencies {
     implementation "androidx.paging:paging-runtime-ktx:3.1.1" // For Kotlin use paging-runtime-ktx
     implementation "androidx.paging:paging-runtime-ktx:3.1.1" // For Kotlin use paging-runtime-ktx
 
-    implementation "androidx.room:room-runtime:2.6.1"
-    annotationProcessor "androidx.room:room-compiler:2.6.1"
+    implementation "androidx.room:room-runtime:2.8.3"
+    ksp "androidx.room:room-compiler:2.8.3"
     // ViewModel
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.8.7"
     // LiveData
